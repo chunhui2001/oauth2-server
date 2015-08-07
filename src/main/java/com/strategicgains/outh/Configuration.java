@@ -1,9 +1,11 @@
-package com.strategicgains.outh.config;
+package com.strategicgains.outh;
 
 import java.util.Properties;
 
 import org.restexpress.RestExpress;
-import com.strategicgains.outh.controller.SampleController;
+
+import com.strategicgains.outh.token.TokenController;
+
 import org.restexpress.util.Environment;
 
 public class Configuration
@@ -19,7 +21,7 @@ extends Environment
 	private String baseUrl;
 	private int executorThreadPoolSize;
 
-	private SampleController sampleController;
+	private TokenController sampleController;
 
 	@Override
 	protected void fillValues(Properties p)
@@ -32,7 +34,7 @@ extends Environment
 
 	private void initialize()
 	{
-		sampleController = new SampleController();
+		sampleController = new TokenController();
 	}
 
 	public int getPort()
@@ -50,7 +52,7 @@ extends Environment
 		return executorThreadPoolSize;
 	}
 
-	public SampleController getSampleController()
+	public TokenController getSampleController()
 	{
 		return sampleController;
 	}

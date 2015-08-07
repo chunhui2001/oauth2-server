@@ -24,7 +24,6 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -323,7 +322,7 @@ implements HttpServletRequest
 	@Override
 	public String getMethod()
 	{
-		return request.getHttpMethod().getName();
+		return request.getHttpMethod().name();
 	}
 
 	@Override

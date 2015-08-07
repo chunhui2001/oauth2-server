@@ -13,15 +13,16 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.restexpress.RestExpress;
+
 import com.strategicgains.outh.Main;
+import com.strategicgains.outh.OAuth2Server;
 
 public class SampleControllerTest {
 
     /**
      * The REST server that handles the test calls.
      */
-    private static RestExpress server;
+    private static OAuth2Server server;
     private HttpClient httpClient;
     private static final String BASE_URL = "http://localhost:8081";
 
@@ -29,7 +30,7 @@ public class SampleControllerTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         String[] env = { "dev" };
-        server = Main.initializeServer(env);
+        server = Main.newServer(env);
     }
 
     @AfterClass

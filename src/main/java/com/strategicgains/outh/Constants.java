@@ -2,8 +2,10 @@ package com.strategicgains.outh;
 
 public class Constants
 {
+	public static final String SERVICE_NAME = "OAuth2 Server";
+
 	/**
-	 * These define the URL parmaeters used in the route definition strings (e.g. '{userId}').
+	 * These define the URL parameters used in the route definition strings (e.g. '{userId}').
 	 */
 	public class Url
 	{
@@ -18,7 +20,7 @@ public class Constants
 	public class Routes
 	{
 		//TODO: Your Route names here...
-		public static final String SINGLE_SAMPLE = "sample.single.route";
-		public static final String SAMPLE_COLLECTION = "sample.collection.route";
+		public static final String AUTHORIZE = "sample.single.route";
+		public static final String TOKEN = "sample.collection.route";
 	}
 }
