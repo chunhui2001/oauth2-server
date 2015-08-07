@@ -1,4 +1,4 @@
-package com.strategicgains.outh;
+package com.strategicgains.oauth;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

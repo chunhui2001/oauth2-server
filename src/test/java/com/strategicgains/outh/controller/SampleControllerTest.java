@@ -14,8 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.strategicgains.outh.Main;
-import com.strategicgains.outh.OAuth2Server;
+import com.strategicgains.oauth.Main;
+import com.strategicgains.oauth.OAuth2Server;
 
 public class SampleControllerTest {
 

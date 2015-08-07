@@ -13,12 +13,12 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
  */
-package com.strategicgains.outh;
+package com.strategicgains.oauth;
 
 import org.restexpress.RestExpress;
 import org.restexpress.pipeline.SimpleConsoleLogMessageObserver;
 
-import com.strategicgains.outh.serialization.SerializationProvider;
+import com.strategicgains.oauth.serialization.SerializationProvider;
 
 /**
  * @author tfredrich
@@ -36,9 +36,8 @@ public class OAuth2Server
 	{
 		super();
 		this.config = config;
-		this.server = new RestExpress();
 		RestExpress.setDefaultSerializationProvider(new SerializationProvider());
-		RestExpress server = new RestExpress()
+		server = new RestExpress()
 				.setName(Constants.SERVICE_NAME)
 				.setBaseUrl(config.getBaseUrl())
 				.setExecutorThreadCount(config.getExecutorThreadPoolSize())

@@ -13,7 +13,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 */
-package com.strategicgains.outh.domain;
+package com.strategicgains.oauth.domain;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,8 +86,7 @@ implements HttpServletRequest
 	@Override
 	public int getContentLength()
 	{
-//		return request.getContentLength();
-		return 0;
+		return request.getBody().readableBytes();
 	}
 
 	@Override

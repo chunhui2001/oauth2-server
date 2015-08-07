@@ -1,4 +1,4 @@
-package com.strategicgains.outh.serialization;
+package com.strategicgains.oauth.serialization;
 
 import org.restexpress.serialization.json.JacksonJsonProcessor;
 

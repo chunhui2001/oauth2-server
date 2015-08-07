@@ -1,4 +1,4 @@
-package com.strategicgains.outh.token;
+package com.strategicgains.oauth.token;
 
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
@@ -10,34 +10,31 @@ import org.restexpress.Request;
 import org.restexpress.Response;
 import org.restexpress.exception.UnauthorizedException;
 
-import com.strategicgains.outh.domain.RequestWrapper;
+import com.strategicgains.oauth.domain.Realm;
+import com.strategicgains.oauth.domain.RequestWrapper;
 
 public class TokenController
 {
-	public TokenController()
+	private OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
+	private Realm realm;
+
+	public TokenController(Realm realm)
 	{
 		super();
+		this.realm = realm;
 	}
 
-	public Oauth2Token create(Request request, Response response)
+	public Oauth2Token token(Request request, Response response)
 	{
-		OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
-
 		try
 		{
 			OAuthTokenRequest oauthRequest = new OAuthTokenRequest(new RequestWrapper(request));
-			String authzCode = oauthRequest.getCode();
-//			validateClient(oauthRequest);
-
-			// some code
+			realm.validate(oauthRequest);
 
 			String accessToken = oauthIssuerImpl.accessToken();
 			String refreshToken = oauthIssuerImpl.refreshToken();
 
-			return new Oauth2Token()
-				.expiresIn(3600)
-				.accessToken(accessToken)
-				.refreshToken(refreshToken);
+			return realm.newToken(accessToken, refreshToken);
 		}
 		catch (OAuthProblemException | OAuthSystemException ex)
 		{
