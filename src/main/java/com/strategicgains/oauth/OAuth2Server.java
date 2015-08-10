@@ -16,6 +16,7 @@
 package com.strategicgains.oauth;
 
 import org.restexpress.RestExpress;
+import org.restexpress.exception.UnauthorizedException;
 import org.restexpress.pipeline.SimpleConsoleLogMessageObserver;
 
 import com.strategicgains.oauth.serialization.SerializationProvider;
@@ -42,6 +43,8 @@ public class OAuth2Server
 				.setBaseUrl(config.getBaseUrl())
 				.setExecutorThreadCount(config.getExecutorThreadPoolSize())
 				.addMessageObserver(new SimpleConsoleLogMessageObserver());
+
+		server.mapException(Oauth2Exception.class, UnauthorizedException.class);
 
 		Routes.define(config, server);
 	}

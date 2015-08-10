@@ -1,45 +1,42 @@
 package com.strategicgains.oauth.token;
 
-import org.apache.oltu.oauth2.as.issuer.MD5Generator;
-import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
-import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
-import org.apache.oltu.oauth2.as.request.OAuthTokenRequest;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import java.util.List;
+import java.util.Map;
+
 import org.restexpress.Request;
 import org.restexpress.Response;
-import org.restexpress.exception.UnauthorizedException;
 
-import com.strategicgains.oauth.domain.Realm;
-import com.strategicgains.oauth.domain.RequestWrapper;
+import com.strategicgains.oauth.realm.Realm;
+
+import io.netty.handler.codec.http.HttpHeaders;
 
 public class TokenController
 {
-	private OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
+	private TokenService tokens;
 	private Realm realm;
 
-	public TokenController(Realm realm)
+	public TokenController(TokenService tokenService, Realm realm)
 	{
 		super();
+		this.tokens = tokenService;
 		this.realm = realm;
 	}
 
-	public Oauth2Token token(Request request, Response response)
+	public OauthTokenResponse token(Request request, Response response)
 	{
-		try
-		{
-			OAuthTokenRequest oauthRequest = new OAuthTokenRequest(new RequestWrapper(request));
-			realm.validate(oauthRequest);
+		OauthTokenRequest tr = null;
 
-			String accessToken = oauthIssuerImpl.accessToken();
-			String refreshToken = oauthIssuerImpl.refreshToken();
-
-			return realm.newToken(accessToken, refreshToken);
-		}
-		catch (OAuthProblemException | OAuthSystemException ex)
+		if (isFormEncoded(request))
 		{
-			throw new UnauthorizedException(ex);
+			tr = new OauthTokenRequest(request.getBodyFromUrlFormEncoded(false));
 		}
+		else
+		{
+			tr = request.getBodyAs(OauthTokenRequest.class, "Token request details not provided.");
+		}
+
+		// TODO: Perform semantic validation on the incoming OauthTokenRequest (via Realm).
+		return tokens.createAccessToken(tr);
 	}
 
 	public Object authorize(Request request, Response response)
@@ -73,4 +70,10 @@ public class TokenController
 //		}
 		return null;
 	}
+
+	private boolean isFormEncoded(Request request)
+    {
+		String contentType = request.getHeader(HttpHeaders.Names.CONTENT_TYPE);
+		return (contentType == null ? false : contentType.startsWith("application/x-www-form-urlencoded"));
+    }
 }

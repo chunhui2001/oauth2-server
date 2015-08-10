@@ -13,8 +13,8 @@ import org.restexpress.common.query.QueryRange;
 import org.restexpress.exception.ConflictException;
 import org.restexpress.exception.NotFoundException;
 
-import com.strategicgains.apicore.exception.InvalidKeyException;
-import com.strategicgains.apicore.service.ApiKeyGenerator;
+import com.strategicgains.oauth.InvalidKeyException;
+import com.strategicgains.oauth.domain.ApiKeyGenerator;
 import com.strategicgains.repoexpress.adapter.Identifiers;
 import com.strategicgains.syntaxe.ValidationEngine;
 

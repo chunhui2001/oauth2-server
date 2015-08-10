@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -114,6 +115,14 @@ implements HttpServletRequest
 				for (Entry<String, List<String>> entry : request.getBodyFromUrlFormEncoded().entrySet())
 				{
 					parameters.put(entry.getKey(), entry.getValue().get(0));
+				}
+			}
+			else if (request.getMediaType().startsWith("application/json"))
+			{
+				Map<String, Object> m = request.getBodyAs(HashMap.class);
+				for (Entry<String, Object> entry : m.entrySet())
+				{
+					parameters.put(entry.getKey(), entry.getValue().toString());
 				}
 			}
 		}
