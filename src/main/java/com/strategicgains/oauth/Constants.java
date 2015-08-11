@@ -26,6 +26,7 @@ public class Constants
 	{
 		public static final String AUTHORIZE = "token.authorize";
 		public static final String TOKEN = "token.acquisition";
+		public static final String REDIRECTION = "token.redirect";
 
 		public static final String TENANT = "tenant.individual";
 		public static final String TENANT_COLLECTION = "tenant.collection";

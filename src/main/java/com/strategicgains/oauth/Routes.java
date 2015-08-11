@@ -21,10 +21,26 @@ public abstract class Routes
 {
 	public static void define(Configuration config, RestExpress server)
     {
-		server.uri("/oauth/token", config.getTokenController())
+		// Used for all but 'implicit' grant types.
+		server.uri("/oauth2/token", config.getTokenController())
 			.action("token", HttpMethod.POST)
-			.name(Constants.Routes.TOKEN)
-			.flag(Flags.Auth.PUBLIC_ROUTE);
+			.flag(Flags.Auth.PUBLIC_ROUTE)
+			.noSerialization()
+			.name(Constants.Routes.TOKEN);
+
+		// Used for authorization code and implicit grant types.
+		server.uri("/oauth2/authorization", config.getTokenController())
+			.action("authorization", HttpMethod.GET)
+//			.action("authorization", HttpMethod.POST)
+			.flag(Flags.Auth.PUBLIC_ROUTE)
+			.noSerialization()
+			.name(Constants.Routes.AUTHORIZE);
+
+		server.uri("/oauth2/authorized", config.getTokenController())
+			.action("redirection", HttpMethod.GET)
+			.flag(Flags.Auth.PUBLIC_ROUTE)
+			.noSerialization()
+			.name(Constants.Routes.REDIRECTION);
 
 		server.uri("/tenants", config.getTenantController())
 			.method(POST)

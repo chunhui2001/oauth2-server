@@ -82,7 +82,7 @@ extends Environment
 		TokenGenerator tokenGenerator = new TokenGenerator(tokenBytes, refreshTokenBytes);
 		TokenService tokenService = new TokenService(tenantRepo, appRepo, tokenGenerator, saltBytes);
 
-		tokenController = new TokenController(tokenService, null);
+		tokenController = new TokenController();
 
 		TenantService tenantService = new TenantService(tenantRepo, apiKeyGenerator);
 		tenantController = new TenantController(tenantService);
