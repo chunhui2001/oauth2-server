@@ -15,6 +15,7 @@
  */
 package com.strategicgains.oauth;
 
+import com.strategicgains.oauth.statics.StaticSavedEngine;
 import org.restexpress.RestExpress;
 import org.restexpress.exception.UnauthorizedException;
 import org.restexpress.pipeline.SimpleConsoleLogMessageObserver;
@@ -36,8 +37,11 @@ public class OAuth2Server
 	public OAuth2Server(Configuration config)
 	{
 		super();
+
+		SerializationProvider serializationProvider = new SerializationProvider();
+
 		this.config = config;
-		RestExpress.setDefaultSerializationProvider(new SerializationProvider());
+		RestExpress.setDefaultSerializationProvider(serializationProvider);
 		server = new RestExpress()
 				.setName(Constants.SERVICE_NAME)
 				.setBaseUrl(config.getBaseUrl())
@@ -45,6 +49,9 @@ public class OAuth2Server
 				.addMessageObserver(new SimpleConsoleLogMessageObserver());
 
 		server.mapException(Oauth2Exception.class, UnauthorizedException.class);
+
+
+		StaticSavedEngine.enable(server, serializationProvider);
 
 		Routes.define(config, server);
 	}

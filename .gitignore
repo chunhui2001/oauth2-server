@@ -1,4 +1,10 @@
-.project
-.classpath
-.settings/
+*.DS_Store
+*~
+.idea
+*.log
+logs
+node_modules
+*.swp
+temp
+*.iml
 target/

@@ -16,11 +16,14 @@ extends AbstractSerializationProvider
 	public SerializationProvider()
     {
 	    super();
-	    add(JSON_SERIALIZER, RESPONSE_WRAPPER, true);
+		add(JSON_SERIALIZER, RESPONSE_WRAPPER, true);
     }
 
 	public static SerializationProcessor json()
 	{
 		return JSON_SERIALIZER;
 	}
+
+	public static ResponseWrapper wrapper() { return RESPONSE_WRAPPER; }
+
 }

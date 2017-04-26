@@ -35,5 +35,9 @@ public class Constants
 		public static final String APPLICATION = "application.individual";
 		public static final String APPLICATION_COLLECTION = "application.collection";
 		public static final String APPLICATION_CREDENTIALS = "application.credentials";
+
+
+
+		public static final String INDEX_ROUTE = "application.index.route";
 	}
 }

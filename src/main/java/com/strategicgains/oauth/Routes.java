@@ -14,13 +14,19 @@ import static io.netty.handler.codec.http.HttpMethod.GET;
 import static io.netty.handler.codec.http.HttpMethod.POST;
 import static io.netty.handler.codec.http.HttpMethod.PUT;
 
+
+
+import static com.strategicgains.oauth.Constants.Routes.INDEX_ROUTE;
+
 import org.restexpress.Flags;
 import org.restexpress.RestExpress;
+import com.strategicgains.oauth.statics.StaticController;
 
 public abstract class Routes
 {
 	public static void define(Configuration config, RestExpress server)
     {
+
 		server.uri("/oauth/token", config.getTokenController())
 			.action("token", HttpMethod.POST)
 			.name(Constants.Routes.TOKEN)
@@ -60,5 +66,11 @@ public abstract class Routes
 			.action("readCredentials", GET)
 			.action("resetCredentials", PUT)
 			.name(APPLICATION_CREDENTIALS);
+
+
+
+		server.uri("/index|/index.{format}", config.getHomeController())
+				.method(HttpMethod.GET)
+				.name(INDEX_ROUTE);
     }
 }

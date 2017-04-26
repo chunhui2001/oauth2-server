@@ -2,6 +2,7 @@ package com.strategicgains.oauth;
 
 import java.util.Properties;
 
+import com.strategicgains.oauth.controllers.HomeController;
 import org.restexpress.RestExpress;
 import org.restexpress.common.exception.ConfigurationException;
 import org.restexpress.util.Environment;
@@ -50,6 +51,7 @@ extends Environment
 	private TokenController tokenController;
 	private TenantController tenantController;
 	private ApplicationController applicationController;
+	private HomeController homeController;
 
 	@Override
 	protected void fillValues(Properties p)
@@ -89,6 +91,8 @@ extends Environment
 
 		ApplicationService appService = new ApplicationService(appRepo, apiKeyGenerator);
 		applicationController = new ApplicationController(appService);
+
+		homeController = new HomeController();
 	}
 
 	public int getPort()
@@ -120,4 +124,6 @@ extends Environment
 	{
 		return applicationController;
 	}
+
+	public HomeController getHomeController() { return homeController; }
 }
