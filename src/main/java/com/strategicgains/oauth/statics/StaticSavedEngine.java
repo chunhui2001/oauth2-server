@@ -25,8 +25,8 @@ import static io.netty.handler.codec.http.HttpMethod.GET;
  */
 public class StaticSavedEngine {
 
-    public static final String STATIC_ROOT_DIR =  System.getProperty("java.class.path") + "/statics";
-    public static final String STATIC_TEMPLATE_DIR =  System.getProperty("java.class.path") + "/templates";
+    public static final String STATIC_ROOT_DIR =  System.getProperty("java.class.path").replaceAll("\\.jar", "") + "/statics";
+    public static final String STATIC_TEMPLATE_DIR =  System.getProperty("java.class.path").replaceAll("\\.jar", "") + "/templates";
 
     public static void enable(RestExpress server, SerializationProvider serializationProvider) {
 
@@ -34,6 +34,9 @@ public class StaticSavedEngine {
         serializationProvider.add(new StaticStreamProcessor("jpeg", "image/jpeg"), SerializationProvider.wrapper(), false);
         serializationProvider.add(new StaticStreamProcessor("html", "text/html"), SerializationProvider.wrapper(), false);
         serializationProvider.add(new StaticStreamProcessor("css", "text/css"), SerializationProvider.wrapper(), false);
+
+        String s1 = System.getProperty("java.class.path").replaceAll(".jar", "");
+        String s2 = System.getProperty("java.class.path").replaceAll("\\.jar", "");
 
         File staticRoot = new File(STATIC_ROOT_DIR);
 

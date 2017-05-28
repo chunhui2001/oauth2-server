@@ -77,7 +77,13 @@ public class StaticStreamProcessor extends StaticSerializationProcessor {
 
             String realPath = StaticSavedEngine.STATIC_TEMPLATE_DIR + contextResult.getTemplate() ;
 
+            String s = System.getProperty("java.class.path").replaceAll(".jar", "");
+            String s1 = System.getProperty("java.class.path").replaceAll("\\.jar", "");
+
             JtwigTemplate template = JtwigTemplate.fileTemplate(realPath);
+
+//            JtwigTemplate template = JtwigTemplate.classpathTemplate(contextResult.getTemplate());
+
             JtwigModel model = JtwigModel.newModel(contextResult.getData());
             String htmlContent = template.render(model);
 

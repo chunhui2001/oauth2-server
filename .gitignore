@@ -8,3 +8,4 @@ node_modules
 temp
 *.iml
 target/
+src/main/java/com/strategicgains/oauth/codegen/

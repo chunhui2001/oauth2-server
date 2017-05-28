@@ -20,6 +20,12 @@ import com.strategicgains.oauth.tenant.TenantService;
 import com.strategicgains.oauth.token.TokenController;
 import com.strategicgains.oauth.token.TokenService;
 import com.strategicgains.repoexpress.mongodb.MongoConfig;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 public class Configuration
 extends Environment
@@ -77,6 +83,24 @@ extends Environment
 
 	private void initialize(MongoConfig mongo, int clientIdBytes, int clientSecretBytes, int tokenBytes, int refreshTokenBytes, int saltBytes)
 	{
+
+        AbstractApplicationContext appContext =
+                new ClassPathXmlApplicationContext(
+                        new String[] {"classpath:applicationContext.xml"}, false
+                );
+
+        ConfigurableEnvironment env = appContext.getEnvironment();
+
+
+
+        env.setDefaultProfiles("test");
+        env.setActiveProfiles("test");
+
+        appContext.setEnvironment(env);
+
+
+        appContext.refresh();
+
 		TenantRepository tenantRepo = new MongodbTenantRepository(mongo.getClient(), mongo.getDbName());
 		ApplicationRepository appRepo = new MongodbApplicationRepository(mongo.getClient(), mongo.getDbName());
 
@@ -92,7 +116,9 @@ extends Environment
 		ApplicationService appService = new ApplicationService(appRepo, apiKeyGenerator);
 		applicationController = new ApplicationController(appService);
 
-		homeController = new HomeController();
+
+//        homeController = new HomeController();
+		homeController = (HomeController)appContext.getBean("homeController");
 	}
 
 	public int getPort()

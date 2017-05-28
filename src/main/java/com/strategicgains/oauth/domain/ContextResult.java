@@ -10,7 +10,7 @@ public class ContextResult {
     private boolean error = false;
     private Map<String, Object> data = null;
     private String[] message = null;
-    private Integer code = null;
+    private Integer code = 0;
     private String template = null;
 
 
