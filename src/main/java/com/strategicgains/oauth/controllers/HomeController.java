@@ -1,8 +1,10 @@
 package com.strategicgains.oauth.controllers;
 
 
+import com.strategicgains.oauth.codegen.dao.UserMapper;
 import com.strategicgains.oauth.domain.ContextResult;
 import com.strategicgains.oauth.services.IUserService;
+import com.strategicgains.oauth.services.impl.UserServiceImpl;
 import org.restexpress.Request;
 import org.restexpress.Response;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,11 +18,10 @@ import java.util.Map;
  */
 public class HomeController {
 
-    @Value("${driver}")
     private String magic;
 
     private String name;
-    private IUserService userService = null;
+    private UserServiceImpl userService = null;
 
 
     public String getName() {
@@ -31,11 +32,11 @@ public class HomeController {
         this.name = name;
     }
 
-    public IUserService getUserService() {
+    public UserServiceImpl getUserService() {
         return userService;
     }
 
-    public void setUserService(IUserService userService) {
+    public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
     }
 
@@ -45,9 +46,9 @@ public class HomeController {
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("userName", ".. 张春辉8665hhh" + this.getName() + " " + userService.getUserById(1) + this.magic);
 
-        result.setData(map);
+//        result.setData(userService.getUser(1));
+        result.setData(666);
         result.setTemplate("/index.twig");
 
         return result;

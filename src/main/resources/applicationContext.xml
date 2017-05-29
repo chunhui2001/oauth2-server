@@ -21,6 +21,7 @@
     <!--</bean>-->
 
 
+    <import resource="classpath:META-INF/mybatis/spring-mybatis.xml" />
     <import resource="classpath:META-INF/persiste/kinght.xml" />
 
 </beans>

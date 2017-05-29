@@ -8,7 +8,7 @@ import java.util.Map;
 public class ContextResult {
 
     private boolean error = false;
-    private Map<String, Object> data = null;
+    private Object data = null;
     private String[] message = null;
     private Integer code = 0;
     private String template = null;
@@ -22,11 +22,11 @@ public class ContextResult {
         this.error = error;
     }
 
-    public Map<String, Object> getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(Map<String, Object> data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

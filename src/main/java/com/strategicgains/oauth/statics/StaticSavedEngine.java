@@ -34,9 +34,7 @@ public class StaticSavedEngine {
         serializationProvider.add(new StaticStreamProcessor("jpeg", "image/jpeg"), SerializationProvider.wrapper(), false);
         serializationProvider.add(new StaticStreamProcessor("html", "text/html"), SerializationProvider.wrapper(), false);
         serializationProvider.add(new StaticStreamProcessor("css", "text/css"), SerializationProvider.wrapper(), false);
-
-        String s1 = System.getProperty("java.class.path").replaceAll(".jar", "");
-        String s2 = System.getProperty("java.class.path").replaceAll("\\.jar", "");
+        serializationProvider.add(new StaticStreamProcessor("js", "text/javascript"), SerializationProvider.wrapper(), false);
 
         File staticRoot = new File(STATIC_ROOT_DIR);
 

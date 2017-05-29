@@ -13,6 +13,8 @@ import org.restexpress.serialization.SerializationException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -84,7 +86,16 @@ public class StaticStreamProcessor extends StaticSerializationProcessor {
 
 //            JtwigTemplate template = JtwigTemplate.classpathTemplate(contextResult.getTemplate());
 
-            JtwigModel model = JtwigModel.newModel(contextResult.getData());
+            Map<String, Object> contextData = new HashMap<>();
+
+            try {
+                contextData = (Map<String, Object>)contextResult.getData();
+            } catch (Exception e) {
+
+            }
+
+
+            JtwigModel model = JtwigModel.newModel(contextData);
             String htmlContent = template.render(model);
 
             return ByteBuffer.wrap((htmlContent).getBytes());

@@ -24,6 +24,7 @@ public class StaticController
 
 	public StaticResource read(Request request, Response response)
 	{
+
 		return new StaticResource(request.getPath());
 	}
 

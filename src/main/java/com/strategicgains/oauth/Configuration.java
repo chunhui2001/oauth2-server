@@ -93,8 +93,8 @@ extends Environment
 
 
 
-        env.setDefaultProfiles("test");
-        env.setActiveProfiles("test");
+        env.setDefaultProfiles("local");
+        env.setActiveProfiles("local");
 
         appContext.setEnvironment(env);
 

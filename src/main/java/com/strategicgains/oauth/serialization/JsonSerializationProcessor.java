@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.JsonArray;
 import com.strategicgains.oauth.domain.ContextResult;
 import com.strategicgains.util.date.DateAdapterConstants;
 import io.netty.buffer.ByteBuf;
@@ -169,11 +170,10 @@ extends org.restexpress.serialization.json.JsonSerializationProcessor
     {
         try
         {
+
             if (object == null) return ByteBuffer.wrap(EMPTY_STRING_BYTES);
 
-
             if (object instanceof ContextResult) {
-                System.out.println( " JsonSerializationProcessor serialize 2");
                 ContextResult result = (ContextResult)object;
                 result.setTemplate(null);
                 object = result;
@@ -181,9 +181,11 @@ extends org.restexpress.serialization.json.JsonSerializationProcessor
 
             ByteArrayOutputStream b = new ByteArrayOutputStream();
 
+            mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
             mapper.writeValue(b, object);
 
             return ByteBuffer.wrap(b.toByteArray());
+
         }
         catch (IOException e)
         {
