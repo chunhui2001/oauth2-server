@@ -69,12 +69,14 @@ extends org.restexpress.serialization.json.JsonSerializationProcessor
     public JsonSerializationProcessor(ObjectMapper mapper)
     {
         super();
+        mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
         this.mapper = mapper;
     }
 
     private void initialize(SimpleModule module)
     {
         this.mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
         mapper.registerModule(module);
         initializeMapper(mapper);
     }
@@ -181,7 +183,6 @@ extends org.restexpress.serialization.json.JsonSerializationProcessor
 
             ByteArrayOutputStream b = new ByteArrayOutputStream();
 
-            mapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
             mapper.writeValue(b, object);
 
             return ByteBuffer.wrap(b.toByteArray());
