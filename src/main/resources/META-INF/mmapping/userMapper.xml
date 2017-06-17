@@ -1,17 +1,283 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.strategicgains.oauth.entities.mmapping.userMapper">
-
+    <resultMap id="BaseResultMap" type="com.strategicgains.oauth.entities.User">
+        <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+        <result column="USER_PASSWORD" jdbcType="VARCHAR" property="userPassword" />
+        <result column="USER_CODE" jdbcType="CHAR" property="userCode" />
+        <result column="TRUE_NAME" jdbcType="VARCHAR" property="trueName" />
+        <result column="USER_PHONE" jdbcType="VARCHAR" property="userPhone" />
+        <result column="USER_EMAIL" jdbcType="VARCHAR" property="userEmail" />
+        <result column="STATUS" jdbcType="CHAR" property="status" />
+        <result column="IS_MANAGE" jdbcType="CHAR" property="isManage" />
+        <result column="ADD_TIME" jdbcType="TIMESTAMP" property="addTime" />
+        <result column="WX_ID" jdbcType="VARCHAR" property="wxId" />
+        <result column="DEPART_ID" jdbcType="INTEGER" property="departId" />
+        <result column="ROLE_ID" jdbcType="INTEGER" property="roleId" />
+        <result column="USER_TYPE" jdbcType="CHAR" property="userType" />
+        <result column="LAST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+        <result column="OPENID" jdbcType="VARCHAR" property="openid" />
+        <result column="SHOW_NAME" jdbcType="VARCHAR" property="showName" />
+        <result column="WX_REMIND" jdbcType="CHAR" property="wxRemind" />
+        <result column="SMS_REMIND" jdbcType="CHAR" property="smsRemind" />
+        <result column="EMAIL_REMIND" jdbcType="CHAR" property="emailRemind" />
+    </resultMap>
     <sql id="Base_Column_List">
-        USER_ID, DOB, CREATED_TIME, EMAIL, GENDER, USER_NAME, PASSWD, PHONE, ROLES, USER_STATUS,
-        OPENID, PHOTO, UNIONID
+        USER_ID, USER_NAME, USER_PASSWORD, USER_CODE, TRUE_NAME, USER_PHONE, USER_EMAIL,
+        STATUS, IS_MANAGE, ADD_TIME, WX_ID, DEPART_ID, ROLE_ID, USER_TYPE, LAST_LOGIN_TIME,
+        PHONE, OPENID, SHOW_NAME, WX_REMIND, SMS_REMIND, EMAIL_REMIND
     </sql>
-
-    <select id="getUser" parameterType="java.lang.String" resultType="com.strategicgains.oauth.entities.User">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from USERS
-        where USER_ID = #{userId,jdbcType=VARCHAR}
+        from SYS_USER
+        where USER_ID = #{userId,jdbcType=INTEGER}
     </select>
-
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from SYS_USER
+        where USER_ID = #{userId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.strategicgains.oauth.entities.User">
+        insert into SYS_USER (USER_ID, USER_NAME, USER_PASSWORD,
+        USER_CODE, TRUE_NAME, USER_PHONE,
+        USER_EMAIL, STATUS, IS_MANAGE,
+        ADD_TIME, WX_ID, DEPART_ID,
+        ROLE_ID, USER_TYPE, LAST_LOGIN_TIME,
+        PHONE, OPENID, SHOW_NAME,
+        WX_REMIND, SMS_REMIND, EMAIL_REMIND
+        )
+        values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR},
+        #{userCode,jdbcType=CHAR}, #{trueName,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR},
+        #{userEmail,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{isManage,jdbcType=CHAR},
+        #{addTime,jdbcType=TIMESTAMP}, #{wxId,jdbcType=VARCHAR}, #{departId,jdbcType=INTEGER},
+        #{roleId,jdbcType=INTEGER}, #{userType,jdbcType=CHAR}, #{lastLoginTime,jdbcType=TIMESTAMP},
+        #{phone,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{showName,jdbcType=VARCHAR},
+        #{wxRemind,jdbcType=CHAR}, #{smsRemind,jdbcType=CHAR}, #{emailRemind,jdbcType=CHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.strategicgains.oauth.entities.User">
+        insert into SYS_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD,
+            </if>
+            <if test="userCode != null">
+                USER_CODE,
+            </if>
+            <if test="trueName != null">
+                TRUE_NAME,
+            </if>
+            <if test="userPhone != null">
+                USER_PHONE,
+            </if>
+            <if test="userEmail != null">
+                USER_EMAIL,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="isManage != null">
+                IS_MANAGE,
+            </if>
+            <if test="addTime != null">
+                ADD_TIME,
+            </if>
+            <if test="wxId != null">
+                WX_ID,
+            </if>
+            <if test="departId != null">
+                DEPART_ID,
+            </if>
+            <if test="roleId != null">
+                ROLE_ID,
+            </if>
+            <if test="userType != null">
+                USER_TYPE,
+            </if>
+            <if test="lastLoginTime != null">
+                LAST_LOGIN_TIME,
+            </if>
+            <if test="phone != null">
+                PHONE,
+            </if>
+            <if test="openid != null">
+                OPENID,
+            </if>
+            <if test="showName != null">
+                SHOW_NAME,
+            </if>
+            <if test="wxRemind != null">
+                WX_REMIND,
+            </if>
+            <if test="smsRemind != null">
+                SMS_REMIND,
+            </if>
+            <if test="emailRemind != null">
+                EMAIL_REMIND,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=CHAR},
+            </if>
+            <if test="trueName != null">
+                #{trueName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="isManage != null">
+                #{isManage,jdbcType=CHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wxId != null">
+                #{wxId,jdbcType=VARCHAR},
+            </if>
+            <if test="departId != null">
+                #{departId,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=CHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null">
+                #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="showName != null">
+                #{showName,jdbcType=VARCHAR},
+            </if>
+            <if test="wxRemind != null">
+                #{wxRemind,jdbcType=CHAR},
+            </if>
+            <if test="smsRemind != null">
+                #{smsRemind,jdbcType=CHAR},
+            </if>
+            <if test="emailRemind != null">
+                #{emailRemind,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.strategicgains.oauth.entities.User">
+        update SYS_USER
+        <set>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                USER_CODE = #{userCode,jdbcType=CHAR},
+            </if>
+            <if test="trueName != null">
+                TRUE_NAME = #{trueName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userEmail != null">
+                USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=CHAR},
+            </if>
+            <if test="isManage != null">
+                IS_MANAGE = #{isManage,jdbcType=CHAR},
+            </if>
+            <if test="addTime != null">
+                ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wxId != null">
+                WX_ID = #{wxId,jdbcType=VARCHAR},
+            </if>
+            <if test="departId != null">
+                DEPART_ID = #{departId,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                ROLE_ID = #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="userType != null">
+                USER_TYPE = #{userType,jdbcType=CHAR},
+            </if>
+            <if test="lastLoginTime != null">
+                LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="phone != null">
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null">
+                OPENID = #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="showName != null">
+                SHOW_NAME = #{showName,jdbcType=VARCHAR},
+            </if>
+            <if test="wxRemind != null">
+                WX_REMIND = #{wxRemind,jdbcType=CHAR},
+            </if>
+            <if test="smsRemind != null">
+                SMS_REMIND = #{smsRemind,jdbcType=CHAR},
+            </if>
+            <if test="emailRemind != null">
+                EMAIL_REMIND = #{emailRemind,jdbcType=CHAR},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.strategicgains.oauth.entities.User">
+        update SYS_USER
+        set USER_NAME = #{userName,jdbcType=VARCHAR},
+        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+        USER_CODE = #{userCode,jdbcType=CHAR},
+        TRUE_NAME = #{trueName,jdbcType=VARCHAR},
+        USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+        USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+        STATUS = #{status,jdbcType=CHAR},
+        IS_MANAGE = #{isManage,jdbcType=CHAR},
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+        WX_ID = #{wxId,jdbcType=VARCHAR},
+        DEPART_ID = #{departId,jdbcType=INTEGER},
+        ROLE_ID = #{roleId,jdbcType=INTEGER},
+        USER_TYPE = #{userType,jdbcType=CHAR},
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+        PHONE = #{phone,jdbcType=VARCHAR},
+        OPENID = #{openid,jdbcType=VARCHAR},
+        SHOW_NAME = #{showName,jdbcType=VARCHAR},
+        WX_REMIND = #{wxRemind,jdbcType=CHAR},
+        SMS_REMIND = #{smsRemind,jdbcType=CHAR},
+        EMAIL_REMIND = #{emailRemind,jdbcType=CHAR}
+        where USER_ID = #{userId,jdbcType=INTEGER}
+    </update>
 </mapper>

@@ -17,6 +17,7 @@ public class Main
 	throws FileNotFoundException, IOException
     {
 		Configuration config = Environment.load(args, Configuration.class);
+
 		return new OAuth2Server(config);
     }
 }

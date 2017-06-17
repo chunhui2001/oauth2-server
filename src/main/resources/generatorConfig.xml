@@ -7,14 +7,14 @@
 
     <!-- java -jar mybatis-generator-core-1.3.5.jar -configfile generatorConfig.xml -overwrite -->
 
-    <classPathEntry location="/Users/cc/.m2/repository/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />
+    <classPathEntry location="/Users/keesh/GitHub/oauth2-server/libs/mysql-connector-java-5.1.18.jar" />
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/damiaa_db"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/ebid"
                         userId="root"
                         password="Cc">
         </jdbcConnection>
@@ -36,16 +36,8 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="USERS"
+        <table tableName="SYS_USER"
                domainObjectName="User"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
-
-        <table tableName="GOODS"
-               domainObjectName="Goods"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

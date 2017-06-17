@@ -3,70 +3,54 @@ package com.strategicgains.oauth.entities;
 import java.util.Date;
 
 public class User {
-    private String userId;
-
-    private Date dob;
-
-    private Date createdTime;
-
-    private String email;
-
-    private String gender;
+    private Integer userId;
 
     private String userName;
 
-    private String passwd;
+    private String userPassword;
+
+    private String userCode;
+
+    private String trueName;
+
+    private String userPhone;
+
+    private String userEmail;
+
+    private String status;
+
+    private String isManage;
+
+    private Date addTime;
+
+    private String wxId;
+
+    private Integer departId;
+
+    private Integer roleId;
+
+    private String userType;
+
+    private Date lastLoginTime;
 
     private String phone;
 
-    private String roles;
-
-    private String userStatus;
-
     private String openid;
 
-    private String photo;
+    private String showName;
 
-    private String unionid;
+    private String wxRemind;
 
-    public String getUserId() {
+    private String smsRemind;
+
+    private String emailRemind;
+
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
-    public Date getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender == null ? null : gender.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -77,12 +61,108 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getPasswd() {
-        return passwd;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd == null ? null : passwd.trim();
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
+
+    public String getUserCode() {
+        return userCode;
+    }
+
+    public void setUserCode(String userCode) {
+        this.userCode = userCode == null ? null : userCode.trim();
+    }
+
+    public String getTrueName() {
+        return trueName;
+    }
+
+    public void setTrueName(String trueName) {
+        this.trueName = trueName == null ? null : trueName.trim();
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone == null ? null : userPhone.trim();
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail == null ? null : userEmail.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
+    public String getIsManage() {
+        return isManage;
+    }
+
+    public void setIsManage(String isManage) {
+        this.isManage = isManage == null ? null : isManage.trim();
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
+    public String getWxId() {
+        return wxId;
+    }
+
+    public void setWxId(String wxId) {
+        this.wxId = wxId == null ? null : wxId.trim();
+    }
+
+    public Integer getDepartId() {
+        return departId;
+    }
+
+    public void setDepartId(Integer departId) {
+        this.departId = departId;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType == null ? null : userType.trim();
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
     public String getPhone() {
@@ -93,22 +173,6 @@ public class User {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles == null ? null : roles.trim();
-    }
-
-    public String getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus == null ? null : userStatus.trim();
-    }
-
     public String getOpenid() {
         return openid;
     }
@@ -117,19 +181,35 @@ public class User {
         this.openid = openid == null ? null : openid.trim();
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getShowName() {
+        return showName;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo == null ? null : photo.trim();
+    public void setShowName(String showName) {
+        this.showName = showName == null ? null : showName.trim();
     }
 
-    public String getUnionid() {
-        return unionid;
+    public String getWxRemind() {
+        return wxRemind;
     }
 
-    public void setUnionid(String unionid) {
-        this.unionid = unionid == null ? null : unionid.trim();
+    public void setWxRemind(String wxRemind) {
+        this.wxRemind = wxRemind == null ? null : wxRemind.trim();
+    }
+
+    public String getSmsRemind() {
+        return smsRemind;
+    }
+
+    public void setSmsRemind(String smsRemind) {
+        this.smsRemind = smsRemind == null ? null : smsRemind.trim();
+    }
+
+    public String getEmailRemind() {
+        return emailRemind;
+    }
+
+    public void setEmailRemind(String emailRemind) {
+        this.emailRemind = emailRemind == null ? null : emailRemind.trim();
     }
 }
